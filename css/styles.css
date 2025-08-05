@@ -1,87 +1,11 @@
-
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;
 }
-header {
-  background-color: #0F3D54;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;   /* Hace que el header quede fijo */
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08); /* Sombra ligera opcional */
-}
 
-.logo {
-  height: 60px;
-}
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-nav ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
-.hero {
-  background-color: #B3611F;
-  color: white;
-  text-align: center;
-  padding: 4rem 2rem;
-}
-section {
-  padding: 2rem;
-}
-.ensayo {
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  margin-bottom: 1rem;
-}
-.ensayo img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-}
-footer {
-  background-color: #0F3D54;
-  color: white;
-  text-align: center;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
-}
-#ensayos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  align-items: start;    /* <- Esto alinea arriba, en vez de centro */
-  justify-items: start;  /* <- Esto hace que cada tarjeta se pegue a la izquierda */
-}
-
-.ensayo {
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  margin-bottom: 1rem;
-}
-.ensayo img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-}
-
-.ensayo:hover {
-  transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 10px 36px rgba(0,0,0,0.11);
-}
-
+/* HEADER FIJO Y DELGADO */
 header {
   background-color: #0F3D54;
   padding: 0; /* Sin padding para barra delgada */
@@ -91,13 +15,13 @@ header {
   box-shadow: 0 2px 16px rgba(0,0,0,0.08);
 }
 
-/* Menú principal en flex, menú a la izq, logo a la der */
+/* MENÚ Y LOGO */
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.4rem 2rem 0.4rem 1rem; /* Arriba/abajo-der-izq */
-  min-height: 0; /* Permite que sea fino */
+  padding: 0.4rem 2rem 0.4rem 1rem;
+  min-height: 0;
 }
 
 nav ul {
@@ -118,13 +42,71 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #B3611F; /* Cambia de color al pasar el mouse */
+  color: #B3611F;
 }
 
+/* LOGO A LA DERECHA */
 .logo {
-  height: 54px;         /* Puedes ajustar el tamaño aquí */
-  margin-left: 2.5rem;  /* Separa el logo del menú, opcional */
+  height: 54px;
+  margin-left: 2.5rem;
   display: block;
-  max-width: 200px;     /* Opcional, para que no se desborde */
+  max-width: 200px;
   object-fit: contain;
+}
+
+/* HERO / CABECERA SECCIÓN PRINCIPAL */
+.hero {
+  background-color: #B3611F;
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+section {
+  padding: 2rem;
+}
+
+/* GALERÍA DE ENSAYOS */
+#ensayos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: start;
+  justify-items: start;
+}
+
+.ensayo {
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+  border-radius: 1rem;
+  border: none;
+  transition: transform 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ensayo img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.ensayo:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.11);
+}
+
+/* FOOTER */
+footer {
+  background-color: #0F3D54;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
 }
