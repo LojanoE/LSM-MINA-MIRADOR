@@ -64,12 +64,25 @@
     </div>
   </section>
 
-  <section id="mision">
-    <h2>Misión</h2>
-    <p>Brindar ensayos de análisis de suelos y materiales de construcción con precisión, eficiencia y responsabilidad, cumpliendo con las normativas técnicas vigentes y apoyando el desarrollo de proyectos de infraestructura seguros y sostenibles.</p>
-    <h2>Visión</h2>
-    <p>Ser un laboratorio de referencia a nivel regional en estudios de mecánica de suelos y control de calidad de materiales, reconocido por su confiabilidad, innovación tecnológica y compromiso con la mejora continua.</p>
-  </section>
+<section id="mision" class="mision-vision-seccion">
+  <div class="mv-container">
+    <div class="mv-bloque">
+      <div class="mv-icono">🎯</div>
+      <h2>Misión</h2>
+      <p>
+        Brindar ensayos de análisis de suelos y materiales de construcción con precisión, eficiencia y responsabilidad, cumpliendo con las normativas técnicas vigentes y apoyando el desarrollo de proyectos de infraestructura seguros y sostenibles.
+      </p>
+    </div>
+    <div class="mv-bloque">
+      <div class="mv-icono">🚀</div>
+      <h2>Visión</h2>
+      <p>
+        Ser un laboratorio de referencia a nivel regional en estudios de mecánica de suelos y control de calidad de materiales, reconocido por su confiabilidad, innovación tecnológica y compromiso con la mejora continua.
+      </p>
+    </div>
+  </div>
+</section>
+
 
   <section id="certificaciones">
     <h2>Certificaciones</h2>
@@ -84,5 +97,38 @@
     PBX: +59323972000<br>
     © 2025 ECUACORRIENTE S.A. Todos los derechos reservados.</p>
   </footer>
+<script>
+  const menuLinks = document.querySelectorAll('nav ul li a');
+  const sections = document.querySelectorAll('section');
+
+  menuLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (this.hash) {
+        e.preventDefault();
+        const targetId = this.hash.replace('#', '');
+        sections.forEach(sec => {
+          if (sec.id === targetId) {
+            sec.classList.remove('oculto');
+            // scroll solo si no es inicio
+            if (targetId !== 'inicio') {
+              window.scrollTo({ top: sec.offsetTop - 70, behavior: 'smooth' });
+            }
+          } else {
+            sec.classList.add('oculto');
+          }
+        });
+        // Si es INICIO, vuelve a mostrar todo
+        if (targetId === 'inicio') {
+          sections.forEach(sec => sec.classList.remove('oculto'));
+        }
+      }
+    });
+  });
+
+  // Mostrar todo al recargar/página inicial
+  window.addEventListener('DOMContentLoaded', () => {
+    sections.forEach(sec => sec.classList.remove('oculto'));
+  });
+  </script>
 </body>
 </html>
