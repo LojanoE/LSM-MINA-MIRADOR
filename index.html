@@ -12,9 +12,9 @@
     <nav>
       <ul>
         <li><a href="#inicio">INICIO</a></li>
-        <li><a href="#ensayos">ENSAYOS</a></li>
         <li><a href="#mision">MISIÓN Y VISIÓN</a></li>
-        <li><a href="#certificaciones">CERTIFICACIONES</a></li>
+        <li><a href="#ensayos">ENSAYOS</a></li>
+                <li><a href="#certificaciones">CERTIFICACIONES</a></li>
       </ul>
       <img src="img/logo_lab.png" alt="Logo" class="logo">
     </nav>
@@ -106,37 +106,9 @@
     </div>
   </div>
   <script>
-    // ----------------- MENÚ DE SECCIONES -----------------
     const menuLinks = document.querySelectorAll('nav ul li a');
     const sections = document.querySelectorAll('section');
-
-    menuLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        if (this.hash) {
-          e.preventDefault();
-          const targetId = this.hash.replace('#', '');
-          sections.forEach(sec => {
-            if (sec.id === targetId) {
-              sec.classList.remove('oculto');
-              if (targetId !== 'inicio') {
-                window.scrollTo({ top: sec.offsetTop - 70, behavior: 'smooth' });
-              }
-            } else {
-              sec.classList.add('oculto');
-            }
-          });
-          if (targetId === 'inicio') {
-            sections.forEach(sec => sec.classList.remove('oculto'));
-          }
-        }
-      });
-    });
-    window.addEventListener('DOMContentLoaded', () => {
-      sections.forEach(sec => sec.classList.remove('oculto'));
-    });
-
-    // --------------- MODAL PARA ENSAYOS ------------------
-    // Datos extendidos de cada ensayo (puedes personalizar)
+    const modal = document.getElementById('modal-ensayo');
     const detallesEnsayos = {
       'ELA.jpg': {
         titulo: 'Límites de Atterberg',
@@ -156,39 +128,60 @@
       }
     };
 
-    // Elementos del modal
-    const modal = document.getElementById('modal-ensayo');
-    const modalImg = modal.querySelector('.modal-img');
-    const modalTitulo = modal.querySelector('.modal-titulo');
-    const modalDesc = modal.querySelector('.modal-descripcion');
-    const cerrarBtn = modal.querySelector('.modal-cerrar');
-
-    // Abrir modal al hacer click en imagen
-    document.querySelectorAll('#ensayos .ensayo img').forEach(img => {
-      img.addEventListener('click', function() {
-        const src = img.getAttribute('src');
-        const nombreArchivo = src.split('/').pop();
-        const datos = detallesEnsayos[nombreArchivo];
-        if (datos) {
-          modalImg.src = src;
-          modalImg.alt = datos.titulo;
-          modalTitulo.textContent = datos.titulo;
-          modalDesc.innerHTML = datos.descripcion;
-          modal.classList.remove('oculto');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.hash) {
+          e.preventDefault();
+          const targetId = this.hash.replace('#', '');
+          if (targetId === 'inicio') {
+            sections.forEach(sec => sec.classList.remove('oculto'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            sections.forEach(sec => {
+              if (sec.id === targetId) {
+                sec.classList.remove('oculto');
+                window.scrollTo({ top: sec.offsetTop - 70, behavior: 'smooth' });
+              } else {
+                sec.classList.add('oculto');
+              }
+            });
+          }
+          if (modal) modal.classList.add('oculto');
         }
       });
     });
 
-    // Cerrar modal con la X
-    cerrarBtn.onclick = () => modal.classList.add('oculto');
-
-    // Cerrar modal al hacer click fuera del contenido
-    modal.onclick = (e) => { if(e.target === modal) modal.classList.add('oculto'); };
-
-    // Cerrar con tecla Escape
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') modal.classList.add('oculto');
+    window.addEventListener('DOMContentLoaded', () => {
+      sections.forEach(sec => sec.classList.remove('oculto'));
     });
+
+    if (modal) {
+      const modalImg = modal.querySelector('.modal-img');
+      const modalTitulo = modal.querySelector('.modal-titulo');
+      const modalDesc = modal.querySelector('.modal-descripcion');
+      const cerrarBtn = modal.querySelector('.modal-cerrar');
+
+      document.querySelectorAll('#ensayos .ensayo img').forEach(img => {
+        img.addEventListener('click', function() {
+          const src = img.getAttribute('src');
+          const nombreArchivo = src.split('/').pop();
+          const datos = detallesEnsayos[nombreArchivo];
+          if (datos) {
+            modalImg.src = src;
+            modalImg.alt = datos.titulo;
+            modalTitulo.textContent = datos.titulo;
+            modalDesc.innerHTML = datos.descripcion;
+            modal.classList.remove('oculto');
+          }
+        });
+      });
+
+      cerrarBtn.onclick = () => modal.classList.add('oculto');
+      modal.onclick = (e) => { if(e.target === modal) modal.classList.add('oculto'); };
+      document.addEventListener('keydown', function(e){
+        if(e.key === 'Escape') modal.classList.add('oculto');
+      });
+    }
   </script>
 </body>
 </html>
