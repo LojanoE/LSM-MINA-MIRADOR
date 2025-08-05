@@ -97,38 +97,98 @@
     PBX: +59323972000<br>
     © 2025 ECUACORRIENTE S.A. Todos los derechos reservados.</p>
   </footer>
-<script>
-  const menuLinks = document.querySelectorAll('nav ul li a');
-  const sections = document.querySelectorAll('section');
+  <div id="modal-ensayo" class="modal-ensayo oculto">
+    <div class="modal-contenido">
+      <span class="modal-cerrar">&times;</span>
+      <img src="" alt="" class="modal-img">
+      <h3 class="modal-titulo"></h3>
+      <p class="modal-descripcion"></p>
+    </div>
+  </div>
+  <script>
+    // ----------------- MENÚ DE SECCIONES -----------------
+    const menuLinks = document.querySelectorAll('nav ul li a');
+    const sections = document.querySelectorAll('section');
 
-  menuLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      if (this.hash) {
-        e.preventDefault();
-        const targetId = this.hash.replace('#', '');
-        sections.forEach(sec => {
-          if (sec.id === targetId) {
-            sec.classList.remove('oculto');
-            // scroll solo si no es inicio
-            if (targetId !== 'inicio') {
-              window.scrollTo({ top: sec.offsetTop - 70, behavior: 'smooth' });
+    menuLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.hash) {
+          e.preventDefault();
+          const targetId = this.hash.replace('#', '');
+          sections.forEach(sec => {
+            if (sec.id === targetId) {
+              sec.classList.remove('oculto');
+              if (targetId !== 'inicio') {
+                window.scrollTo({ top: sec.offsetTop - 70, behavior: 'smooth' });
+              }
+            } else {
+              sec.classList.add('oculto');
             }
-          } else {
-            sec.classList.add('oculto');
+          });
+          if (targetId === 'inicio') {
+            sections.forEach(sec => sec.classList.remove('oculto'));
           }
-        });
-        // Si es INICIO, vuelve a mostrar todo
-        if (targetId === 'inicio') {
-          sections.forEach(sec => sec.classList.remove('oculto'));
         }
-      }
+      });
     });
-  });
+    window.addEventListener('DOMContentLoaded', () => {
+      sections.forEach(sec => sec.classList.remove('oculto'));
+    });
 
-  // Mostrar todo al recargar/página inicial
-  window.addEventListener('DOMContentLoaded', () => {
-    sections.forEach(sec => sec.classList.remove('oculto'));
-  });
+    // --------------- MODAL PARA ENSAYOS ------------------
+    // Datos extendidos de cada ensayo (puedes personalizar)
+    const detallesEnsayos = {
+      'ELA.jpg': {
+        titulo: 'Límites de Atterberg',
+        descripcion: 'Determina los estados de consistencia del suelo según su humedad. <b>Norma ASTM D4318.</b> <br><br><b>¿Para qué sirve?</b> Permite clasificar y entender el comportamiento plástico de los suelos finos, esencial para diseño de obras de infraestructura.'
+      },
+      'VDC.jpg': {
+        titulo: 'Ensayo de Veleta de Corte',
+        descripcion: 'Determina la resistencia al corte no drenada en suelos blandos y saturados. <b>Norma ASTM D2573.</b><br><br><b>Aplicaciones:</b> Análisis de estabilidad de taludes y cimentaciones superficiales en suelos blandos.'
+      },
+      'PRA.jpg': {
+        titulo: 'Pozo de Reemplazo de Agua',
+        descripcion: 'Medición de densidad en campo mediante reemplazo de agua. <b>Norma ASTM D5030.</b><br><br><b>¿Por qué es importante?</b> Se utiliza para control de compactación en obras de movimiento de tierras.'
+      },
+      'TRX.jpg': {
+        titulo: 'Triaxial de suelos UU/CU/CD y permeabilidad',
+        descripcion: 'Ensayo para determinar la resistencia y permeabilidad en diferentes condiciones. <b>Norma ASTM D4767.</b><br><br><b>¿Qué aporta?</b> Resultados clave para análisis geotécnicos avanzados y diseño seguro de cimentaciones.'
+      }
+    };
+
+    // Elementos del modal
+    const modal = document.getElementById('modal-ensayo');
+    const modalImg = modal.querySelector('.modal-img');
+    const modalTitulo = modal.querySelector('.modal-titulo');
+    const modalDesc = modal.querySelector('.modal-descripcion');
+    const cerrarBtn = modal.querySelector('.modal-cerrar');
+
+    // Abrir modal al hacer click en imagen
+    document.querySelectorAll('#ensayos .ensayo img').forEach(img => {
+      img.addEventListener('click', function() {
+        const src = img.getAttribute('src');
+        const nombreArchivo = src.split('/').pop();
+        const datos = detallesEnsayos[nombreArchivo];
+        if (datos) {
+          modalImg.src = src;
+          modalImg.alt = datos.titulo;
+          modalTitulo.textContent = datos.titulo;
+          modalDesc.innerHTML = datos.descripcion;
+          modal.classList.remove('oculto');
+        }
+      });
+    });
+
+    // Cerrar modal con la X
+    cerrarBtn.onclick = () => modal.classList.add('oculto');
+
+    // Cerrar modal al hacer click fuera del contenido
+    modal.onclick = (e) => { if(e.target === modal) modal.classList.add('oculto'); };
+
+    // Cerrar con tecla Escape
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') modal.classList.add('oculto');
+    });
   </script>
 </body>
 </html>
