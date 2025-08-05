@@ -52,3 +52,29 @@ footer {
   padding: 2rem 1rem;
   font-size: 0.9rem;
 }
+#ensayos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.ensayo {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+  border-radius: 1rem;
+  border: none;
+  transition: transform 0.18s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ensayo img {
+  border-radius: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.ensayo:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.11);
+}
