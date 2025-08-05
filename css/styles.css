@@ -34,13 +34,13 @@ nav ul li a {
 section {
   padding: 2rem;
 }
-.servicio {
+.ensayo {
   background-color: white;
   padding: 1rem;
   border: 1px solid #ccc;
   margin-bottom: 1rem;
 }
-.servicio img {
+.ensayo img {
   width: 100%;
   max-width: 300px;
   height: auto;
