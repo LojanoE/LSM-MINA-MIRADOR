@@ -381,7 +381,7 @@ footer {
 /* ========== UTILIDADES ========== */
 
 section:not(#inicio) > h2 {
-  margin-top: 2.4rem;
+  margin-top: 1.7rem;
 }
 /* ========== SECCIÓN NOTICIAS ========== */
 .noticias-seccion {
@@ -694,5 +694,10 @@ section:not(#inicio) > h2 {
     color: #0F3D54 !important;
     border-color: #0F3D54;
     transform: none !important;
+  }
+}
+@media (max-width: 700px) {
+  section:not(#inicio) > h2 {
+    margin-top: 1.2rem; /* O incluso 0.7rem si quieres menos espacio */
   }
 }
