@@ -65,6 +65,15 @@
       </div>
     </div>
   </section>
+    <!-- Modal para NOTICIAS -->
+    <div id="modal-noticia" class="modal-ensayo oculto">
+      <div class="modal-contenido">
+        <span class="modal-cerrar">&times;</span>
+        <img src="" alt="" class="modal-img">
+        <h3 class="modal-titulo"></h3>
+        <p class="modal-descripcion"></p>
+      </div>
+    </div>
 
   <section id="ensayos">
     <h2>ENSAYOS</h2>
@@ -476,6 +485,54 @@
       const currentSlide = track.querySelector('.current-slide');
       track.style.transform = 'translateX(-' + currentSlide.style.left + ')';
     });
+  // --- MODAL NOTICIAS ---
+  const detallesNoticias = {
+    'noticia1.jpg': {
+      titulo: '¡Nuevos ingresos!',
+      descripcion: 'Conoce en detalle a cada uno de los colaboradores que se suman este mes al laboratorio…'
+    },
+    'noticia2.jpg': {
+      titulo: 'Próximo webinar',
+      descripcion: 'Participa en nuestro seminario online sobre control de calidad de suelos. Cupos limitados.'
+    },
+    'noticia3.jpg': {
+      titulo: 'Nuevo equipo',
+      descripcion: 'Hemos incorporado un nuevo equipo de triaxial de última generación que permite ensayos con carga y drenaje controlado.'
+    }
+  }; // <-- CIERRA AQUÍ EL OBJETO
+
+  const modalNoti = document.getElementById('modal-noticia');
+  if (modalNoti) {
+    const imgNot  = modalNoti.querySelector('.modal-img');
+    const titNot  = modalNoti.querySelector('.modal-titulo');
+    const descNot = modalNoti.querySelector('.modal-descripcion');
+    const cierra  = modalNoti.querySelector('.modal-cerrar');
+
+    // Asignar evento de click a cada imagen de noticia
+    document.querySelectorAll('#noticias .carousel-item img').forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        const nombreFichero = img.src.split('/').pop();
+        const info = detallesNoticias[nombreFichero];
+        if (!info) return;
+        imgNot.src         = img.src;
+        imgNot.alt         = info.titulo;
+        titNot.textContent = info.titulo;
+        descNot.textContent= info.descripcion;
+        modalNoti.classList.remove('oculto');
+      });
+    });
+
+    // Cierre del modal
+    cierra.onclick = () => modalNoti.classList.add('oculto');
+    modalNoti.onclick = e => {
+      if (e.target === modalNoti) modalNoti.classList.add('oculto');
+    };
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') modalNoti.classList.add('oculto');
+    });
+  }
+
   });
   </script>
 </body>

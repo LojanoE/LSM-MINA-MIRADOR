@@ -645,3 +645,7 @@ section:not(#inicio) > h2 {
   margin: 0.5rem auto;
 
 }
+/* Opcional: ancho distinto para noticias */
+#modal-noticia .modal-contenido {
+  max-width: 600px;
+}
