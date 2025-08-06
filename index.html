@@ -10,7 +10,8 @@
 <body>
   <header>
     <nav>
-      <ul>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">&#9776;</button>
+      <ul id="menu">
         <li><a href="#inicio" class="activo">INICIO</a></li>
         <li><a href="#mision">MISIÓN Y VISIÓN</a></li>
         <li><a href="#ensayos">ENSAYOS</a></li>
@@ -337,5 +338,28 @@
     });
   </script>
 
+  <script>
+    // Menú hamburguesa solo móvil
+    const toggleBtn = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    toggleBtn.addEventListener('click', function () {
+      menu.classList.toggle('menu-visible');
+      toggleBtn.innerHTML = menu.classList.contains('menu-visible') ? '&times;' : '&#9776;';
+    });
+    // Cierra menú al dar click en cualquier enlace
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('menu-visible');
+        toggleBtn.innerHTML = '&#9776;';
+      });
+    });
+    // Cierra si tocas fuera (opcional)
+    document.addEventListener('click', function(e){
+      if(window.innerWidth <= 700 && menu.classList.contains('menu-visible') && !menu.contains(e.target) && e.target !== toggleBtn){
+        menu.classList.remove('menu-visible');
+        toggleBtn.innerHTML = '&#9776;';
+      }
+    });
+  </script>
 </body>
 </html>

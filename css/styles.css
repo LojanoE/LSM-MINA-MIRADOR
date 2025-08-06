@@ -477,3 +477,150 @@ nav ul li a:hover {
     margin-left: 1rem;
   }
 }
+.menu-toggle {
+  display: none;  /* Oculto en escritorio */
+}
+
+/* SOLO para móviles */
+@media (max-width: 700px) {
+  nav {
+    flex-wrap: wrap;
+    padding: 0.17rem 0.5rem;
+  }
+  .menu-toggle {
+    display: block;
+    font-size: 2.3rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 1rem;
+    z-index: 110;
+  }
+  #menu {
+    display: none;
+    position: absolute;
+    top: 54px; /* justo debajo del nav */
+    left: 0;
+    width: 100vw;
+    background: #0F3D54;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1.1rem 0.4rem 1rem 0.4rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    z-index: 99;
+  }
+  #menu.menu-visible {
+    display: flex;   /* Mostrar cuando tiene la clase */
+  }
+  nav ul li {
+    width: 100%;
+    text-align: left;
+    margin: 0.2rem 0;
+  }
+  nav ul li a {
+    width: 100%;
+    display: block;
+    font-size: 1.18rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 0.9rem;
+  }
+  .logo {
+    height: 33px;
+    max-width: 100px;
+    margin-left: 0.5rem;
+  }
+}
+@media (max-width: 700px) {
+  nav {
+    flex-wrap: wrap;
+    padding: 0.12rem 0.6rem;
+    align-items: center;
+  }
+  .menu-toggle {
+    display: block;
+    font-size: 2.3rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 1rem;
+    z-index: 110;
+  }
+  #menu {
+    display: none;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    width: 100vw;
+    background: #133F54;   /* Más oscuro para diferenciar */
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.7rem 0 0.7rem 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+    z-index: 99;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+  #menu.menu-visible {
+    display: flex;
+    animation: fadeDown 0.32s cubic-bezier(.67,-0.41,.31,1.29);
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-22px);}
+    to   { opacity: 1; transform: translateY(0);}
+  }
+  nav ul li {
+    width: 100%;
+    text-align: left;
+    margin: 0.06rem 0;
+  }
+  nav ul li a {
+    width: 98%;
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: #17516b;      /* O un azul más suave */
+    color: #fff;
+    padding: 0.7rem 1.3rem;
+    border-radius: 0.8rem;
+    margin: 0.16rem auto 0.18rem auto;
+    transition: background 0.21s, color 0.22s, box-shadow 0.17s;
+    box-shadow: 0 2px 10px rgba(13,27,51,0.07);
+    border: 2px solid transparent;
+  }
+  nav ul li a.activo,
+  nav ul li a.selected {
+    background: #B3611F;
+    color: #fff;
+    border-color: #f9b56d;
+    box-shadow: 0 2px 18px rgba(179,97,31,0.13);
+    font-weight: 900;
+  }
+  nav ul li a:hover {
+    background: #e3edf7;
+    color: #0F3D54;
+    border-color: #0F3D54;
+  }
+  .logo {
+    height: 30px;
+    max-width: 90px;
+    margin-left: 0.7rem;
+  }
+}
+@media (max-width: 700px) {
+  .logo {
+    height: 80px;      /* antes 30px o 33px, sube a 44px */
+    max-width: 200px;  /* antes 90px o 100px */
+    margin-left: 0.5rem;
+    margin-right: 0.6rem;
+    object-fit: contain;
+    /* Opcional: agrega sombra muy suave */
+    box-shadow: 0 2px 10px rgba(15,61,84,0.05);
+  }
+  nav {
+    align-items: center;
+    min-height: 54px;   /* asegúrate que el header no colapse */
+  }
+}
