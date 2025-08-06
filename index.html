@@ -13,6 +13,7 @@
       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">&#9776;</button>
       <ul id="menu">
         <li><a href="#inicio" class="activo">INICIO</a></li>
+        <li><a href="#noticias">NOTICIAS</a></li>
         <li><a href="#mision">MISIÓN Y VISIÓN</a></li>
         <li><a href="#ensayos">ENSAYOS</a></li>
         <li><a href="#certificaciones">CERTIFICACIONES PERSONAL</a></li>
@@ -28,7 +29,42 @@
     <h1>Laboratorio de Suelos y Materiales</h1>
     <p>Mina Mirador – Calidad y precisión en cada análisis</p>
   </div>
-</section>
+</section>  
+
+  <section id="noticias" class="noticias-seccion">
+    <h2>Noticias</h2>
+    <div class="carousel" id="carousel">
+      <button class="carousel-control prev" aria-label="Anterior">&lsaquo;</button>
+      <div class="carousel-track-container">
+        <ul class="carousel-track">
+          <li class="carousel-item current-slide">
+            <img src="img/noticias/noticia1.jpg" alt="Noticia 1">
+            <h3>¡Nuevos ingresos!</h3>
+            <p>Les presentamos los nuevos ingresos del mes. Ingresa a la noticia y conoce en detalle a cada uno de los colaboradores.</p>
+            <a href="#" class="btn-leer">Ver más</a>
+          </li>
+          <li class="carousel-item">
+            <img src="img/noticias/noticia2.jpg" alt="Noticia 2">
+            <h3>Próximo webinar</h3>
+            <p>Participa en nuestro seminario online sobre control de calidad de suelos. Cupos limitados.</p>
+            <a href="#" class="btn-leer">Ver más</a>
+          </li>
+          <li class="carousel-item">
+            <img src="img/noticias/noticia3.jpg" alt="Noticia 3">
+            <h3>Nuevo equipo</h3>
+            <p>Hemos incorporado un nuevo equipo de triaxial de última generación para ensayos especiales.</p>
+            <a href="#" class="btn-leer">Ver más</a>
+          </li>
+        </ul>
+      </div>
+      <button class="carousel-control next" aria-label="Siguiente">&rsaquo;</button>
+      <div class="carousel-nav">
+        <button class="carousel-indicator current-slide" aria-label="Slide 1"></button>
+        <button class="carousel-indicator"          aria-label="Slide 2"></button>
+        <button class="carousel-indicator"          aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </section>
 
   <section id="ensayos">
     <h2>ENSAYOS</h2>
@@ -360,6 +396,68 @@
         toggleBtn.innerHTML = '&#9776;';
       }
     });
+  </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', ()=> {
+    const track    = document.querySelector('.carousel-track');
+    const slides   = Array.from(track.children);
+    const nextBtn  = document.querySelector('.carousel-control.next');
+    const prevBtn  = document.querySelector('.carousel-control.prev');
+    const dotsNav  = document.querySelector('.carousel-nav');
+    const dots     = Array.from(dotsNav.children);
+
+    // Posicionar cada slide
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    slides.forEach((slide, i) => slide.style.left = (slideWidth * i) + 'px');
+
+    // Funciones de movimiento
+    const moveToSlide = (current, target) => {
+      track.style.transform = 'translateX(-' + target.style.left + ')';
+      current.classList.remove('current-slide');
+      target.classList.add('current-slide');
+    };
+    const updateDots = (currentDot, targetDot) => {
+      currentDot.classList.remove('current-slide');
+      targetDot.classList.add('current-slide');
+    };
+
+    // Flecha adelante
+    nextBtn.addEventListener('click', () => {
+      const current = track.querySelector('.current-slide');
+      const next    = current.nextElementSibling || slides[0];
+      const currentDot = dotsNav.querySelector('.current-slide');
+      const nextDot    = currentDot.nextElementSibling   || dots[0];
+      moveToSlide(current, next);
+      updateDots(currentDot, nextDot);
+    });
+
+    // Flecha atrás
+    prevBtn.addEventListener('click', () => {
+      const current = track.querySelector('.current-slide');
+      const prev    = current.previousElementSibling || slides[slides.length - 1];
+      const currentDot = dotsNav.querySelector('.current-slide');
+      const prevDot    = currentDot.previousElementSibling   || dots[dots.length - 1];
+      moveToSlide(current, prev);
+      updateDots(currentDot, prevDot);
+    });
+
+    // Click en indicadores
+    dotsNav.addEventListener('click', e => {
+      const targetDot = e.target.closest('button');
+      if (!targetDot) return;
+      const idx = dots.findIndex(dot => dot === targetDot);
+      const current = track.querySelector('.current-slide');
+      const currentDot = dotsNav.querySelector('.current-slide');
+      moveToSlide(current, slides[idx]);
+      updateDots(currentDot, targetDot);
+    });
+
+    // Autoplay cada 8s y pausa al hover
+    let autoplay = setInterval(() => nextBtn.click(), 8000);
+    const carousel = document.getElementById('carousel');
+    carousel.addEventListener('mouseover', ()=> clearInterval(autoplay));
+    carousel.addEventListener('mouseout',  ()=> { autoplay = setInterval(() => nextBtn.click(), 8000); });
+  });
   </script>
 </body>
 </html>
