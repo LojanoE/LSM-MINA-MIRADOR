@@ -362,3 +362,110 @@ footer {
     margin-bottom: 1.2rem;
   }
 }
+/* Menú principal */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  position: relative;
+  /* Para poner efecto de sombra/hover */
+}
+
+/* Enlace del menú (todos) */
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.4rem;
+  transition: 
+    background 0.21s cubic-bezier(.68,-0.55,.27,1.55),
+    color 0.19s,
+    box-shadow 0.19s;
+  display: block;
+}
+
+/* ACTIVO - le puedes poner la clase "activo" en el <a> correspondiente con JS */
+nav ul li a.activo,
+nav ul li a.selected {
+  background: #B3611F;    /* Naranja */
+  color: #fff;
+  box-shadow: 0 6px 28px rgba(179, 97, 31, 0.22);
+  font-weight: 900;
+  /* Pequeño efecto de escala para pop */
+  transform: scale(1.07);
+}
+
+/* HOVER (no importa si es activo o no) */
+nav ul li a:hover {
+  background: #e3edf7;        /* Azul claro tipo laboratorio */
+  color: #0F3D54;
+  box-shadow: 0 3px 12px rgba(15, 61, 84, 0.18);
+  transform: scale(1.09);
+}
+
+/* Efecto "burbuja" detrás del activo (opcional, visual pro) */
+nav ul li a.activo::after {
+  content: "";
+  position: absolute;
+  left: 7px; right: 7px; top: 7px; bottom: 7px;
+  border-radius: 1.5rem;
+  background: rgba(179, 97, 31, 0.09);
+  z-index: -1;
+  pointer-events: none;
+  box-shadow: 0 3px 12px rgba(179, 97, 31, 0.13);
+}
+
+/* Para móviles, reducir el padding */
+@media (max-width: 700px) {
+  nav ul {
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav ul li a {
+    font-size: 1rem;
+    padding: 0.4rem 1.1rem;
+  }
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  padding: 0.5rem 1.5rem;
+  border-radius: 1.4rem;
+  /* Transiciones suaves y más lentas */
+  transition: 
+    background 0.35s cubic-bezier(.68,-0.55,.27,1.55),
+    color 0.32s,
+    box-shadow 0.33s,
+    transform 0.38s cubic-bezier(.68,-0.55,.27,1.55);
+  display: block;
+}
+
+/* ACTIVO */
+nav ul li a.activo,
+nav ul li a.selected {
+  background: #B3611F;
+  color: #fff;
+  box-shadow: 0 6px 28px rgba(179, 97, 31, 0.22);
+  font-weight: 900;
+  transform: scale(1.07);
+}
+
+/* HOVER */
+nav ul li a:hover {
+  background: #e3edf7;
+  color: #0F3D54;
+  box-shadow: 0 3px 12px rgba(15, 61, 84, 0.18);
+  transform: scale(1.09);
+}
