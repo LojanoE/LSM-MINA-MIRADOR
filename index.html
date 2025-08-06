@@ -25,14 +25,34 @@
     </nav>
   </header>
 
-<section id="inicio" class="hero">
-  <img src="img/laboratorio_equipo.jpg" alt="Equipo del Laboratorio Mina Mirador" class="hero-img">
-  <div class="hero-texto">
-    <h1>Laboratorio de Suelos y Materiales</h1>
-    <p>Mina Mirador – Calidad y precisión en cada análisis</p>
-  </div>
-</section>  
-
+  <section id="inicio" class="hero">
+    <div class="hero-carousel">
+      <button class="hero-control prev" id="hero-prev" aria-label="Anterior">&lsaquo;</button>
+      <div class="hero-track-container">
+        <ul class="hero-track">
+          <li class="hero-slide current-hero">
+            <img src="img/laboratorio_equipo.jpg" alt="Equipo del Laboratorio Mina Mirador" class="hero-img">
+          </li>
+          <li class="hero-slide">
+            <img src="img/noticia1.jpg" alt="Laboratorio - Ensayo 1" class="hero-img">
+          </li>
+          <li class="hero-slide">
+            <img src="img/otra_foto2.jpg" alt="Laboratorio - Ensayo 2" class="hero-img">
+          </li>
+        </ul>
+        <div class="hero-texto-fijo">
+          <h1>Laboratorio de Suelos y Materiales</h1>
+          <p>Mina Mirador – Calidad y precisión en cada análisis</p>
+        </div>
+      </div>
+      <button class="hero-control next" id="hero-next" aria-label="Siguiente">&rsaquo;</button>
+      <div class="hero-nav" id="hero-nav">
+        <button class="hero-indicator current-hero" aria-label="Slide 1"></button>
+        <button class="hero-indicator" aria-label="Slide 2"></button>
+        <button class="hero-indicator" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </section>
   <section id="noticias" class="noticias-seccion">
     <h2>Noticias</h2>
     <div class="carousel" id="carousel">
@@ -542,5 +562,84 @@
       navigator.serviceWorker.register('/service-worker.js');
     }
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Selecciona solo los elementos del slider de INICIO
+    const heroTrack = document.querySelector('.hero-track');
+    const heroSlides = Array.from(heroTrack.children);
+    const nextHeroBtn = document.getElementById('hero-next');
+    const prevHeroBtn = document.getElementById('hero-prev');
+    const heroNav = document.getElementById('hero-nav');
+    const heroDots = Array.from(heroNav.children);
+
+    // Coloca cada slide en su posición
+    const setHeroPosition = () => {
+      const slideWidth = heroSlides[0].getBoundingClientRect().width;
+      heroSlides.forEach((slide, i) => {
+        slide.style.left = (slideWidth * i) + 'px';
+      });
+    };
+    setHeroPosition();
+
+    // Mueve el slide
+    const moveToHero = (current, target) => {
+      heroTrack.style.transform = 'translateX(-' + target.style.left + ')';
+      current.classList.remove('current-hero');
+      target.classList.add('current-hero');
+    };
+
+    // Dots activos
+    const updateHeroDots = (currentDot, targetDot) => {
+      currentDot.classList.remove('current-hero');
+      targetDot.classList.add('current-hero');
+    };
+
+    // Flecha siguiente
+    nextHeroBtn.addEventListener('click', () => {
+      const current = heroTrack.querySelector('.current-hero');
+      const next = current.nextElementSibling || heroSlides[0];
+      const currentDot = heroNav.querySelector('.current-hero');
+      const nextDot = currentDot.nextElementSibling || heroDots[0];
+      moveToHero(current, next);
+      updateHeroDots(currentDot, nextDot);
+    });
+
+    // Flecha anterior
+    prevHeroBtn.addEventListener('click', () => {
+      const current = heroTrack.querySelector('.current-hero');
+      const prev = current.previousElementSibling || heroSlides[heroSlides.length - 1];
+      const currentDot = heroNav.querySelector('.current-hero');
+      const prevDot = currentDot.previousElementSibling || heroDots[heroDots.length - 1];
+      moveToHero(current, prev);
+      updateHeroDots(currentDot, prevDot);
+    });
+
+    // Dots
+    heroNav.addEventListener('click', e => {
+      const targetDot = e.target.closest('button');
+      if (!targetDot) return;
+      const current = heroTrack.querySelector('.current-hero');
+      const currentDot = heroNav.querySelector('.current-hero');
+      const idx = heroDots.findIndex(dot => dot === targetDot);
+      const target = heroSlides[idx];
+      moveToHero(current, target);
+      updateHeroDots(currentDot, targetDot);
+    });
+
+    // Autoplay
+    let heroAutoplay = setInterval(() => nextHeroBtn.click(), 9000);
+    const heroCarousel = document.querySelector('.hero-carousel');
+    heroCarousel.addEventListener('mouseover', () => clearInterval(heroAutoplay));
+    heroCarousel.addEventListener('mouseout', () => {
+      heroAutoplay = setInterval(() => nextHeroBtn.click(), 9000);
+    });
+
+    window.addEventListener('resize', () => {
+      setHeroPosition();
+      const current = heroTrack.querySelector('.current-hero');
+      heroTrack.style.transform = 'translateX(-' + current.style.left + ')';
+    });
+  });
+</script>
 </body>
 </html>
