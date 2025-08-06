@@ -498,12 +498,13 @@ section:not(#inicio) > h2 {
   transition: transform 0.5s ease-in-out;
 }
 .carousel-item {
-  flex: 0 0 100%;
+  flex: 0 0 100%;     /* exactamente el 100% del track-container */
+  margin: 0;          /* sin espacio lateral */
+  box-sizing: border-box;
   background: #fff;
   padding: 1.5rem;
   box-shadow: 0 6px 24px rgba(0,0,0,0.06);
   border-radius: 1rem;
-  margin: 0 0.5rem;
 }
 .carousel-item img {
   width: 100%;
@@ -581,26 +582,26 @@ section:not(#inicio) > h2 {
 .noticias-seccion .carousel {
   max-width: min(90vw, 800px);
   margin: 0 auto;
+  /* ya no necesitamos overflow aquí */
 }
 
-/* Permitimos altura dinámica y sólo ocultamos el desbordamiento horizontal */
 .carousel-track-container {
-  overflow-x: hidden;
-  overflow-y: visible;
-  height: auto;            /* quita cualquier aspect-ratio fijo */
+  /* Ocultamos TODO lo que sobresalga */
+  overflow: hidden !important;
+  /* Que ocupe siempre el 100% del padre (.carousel) */
+  width: 100%;
+  /* Quitamos cualquier height fijo o aspect-ratio */
+  height: auto;
+  border-radius: 1rem;
 }
 
 .carousel-track {
-  /* Para eliminar cualquier salto al redimensionar */
+  display: flex;
+  margin: 0;    /* sin márgenes extra */
+  padding: 0;   /* sin padding extra */
   transition: transform 0.5s ease-in-out;
 }
 
-/* Cada slide ocupa 100% de ancho y auto de alto */
-.carousel-item {
-  flex: 0 0 100%;
-  box-sizing: border-box;
-  padding: 1rem;
-}
 
 /* Imagen responsiva, altura automática */
 .carousel-item img {
@@ -642,4 +643,5 @@ section:not(#inicio) > h2 {
   /* Si quieres que no ocupe más del 90% del slide, por ejemplo */
   max-width: 90%;
   margin: 0.5rem auto;
+
 }
