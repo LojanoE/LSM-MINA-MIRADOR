@@ -46,10 +46,10 @@ nav ul li {
 nav ul li a {
   color: white;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1.13rem;
-  letter-spacing: 1px;
-  padding: 0.42rem 1.35rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.4px;
+  padding: 0.37rem 0.88rem;
   border-radius: 1.1rem;
   display: block;
   transition: 
@@ -58,6 +58,7 @@ nav ul li a {
     box-shadow 0.22s,
     transform 0.22s cubic-bezier(.68,-0.55,.27,1.55);
 }
+
 
 nav ul li a.activo,
 nav ul li a.selected {

@@ -1,8 +1,9 @@
 // service-worker.js
 // Versión 3 - actualizado el 6 de agosto 2025 instalar  transperencia 
+// Actualización V4 al taño web al 100 6/8/2025
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('lsm-mirador-cache-V3').then(cache => {
+    caches.open('lsm-mirador-cache-V4').then(cache => {
       return cache.addAll([
         '/',
         '/index.html',
