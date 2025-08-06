@@ -657,3 +657,37 @@ section:not(#inicio) > h2 {
     max-height: 90vh;  /* hasta 90% de la altura */
   }
 }
+/* ─── Layout responsive para Misión y Visión ─── */
+.mision-vision-seccion .mv-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Cada bloque ocupa al menos 280px, crece hasta llenar el contenedor */
+.mision-vision-seccion .mv-bloque {
+  background: rgba(255,255,255,0.8);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Evita que el título se rompa en dos líneas */
+.mision-vision-seccion .mv-bloque h2 {
+  white-space: nowrap;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Ajusta el tamaño del icono si hiciera falta */
+.mision-vision-seccion .mv-icono {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* En móviles, stack vertical */
+@media (max-width: 500px) {
+  .mision-vision-seccion .mv-container {
+    grid-template-columns: 1fr;
+  }
+}
