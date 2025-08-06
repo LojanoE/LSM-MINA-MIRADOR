@@ -89,6 +89,7 @@
   </section>
 
 
+
 <section id="mision" class="mision-vision-seccion">
   <div class="mv-container">
     <div class="mv-bloque">
@@ -114,6 +115,20 @@
     <p>Aquí puedes mostrar tus acreditaciones, normas técnicas y sellos de calidad.</p>
   </section>
 
+<section id="estadistica" style="text-align:center;">
+  <h2>Estadística de Ensayos Realizados</h2>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <canvas id="grafico-ensayos" width="380" height="380"></canvas>
+  </div>
+  <div style="text-align:center; margin-top: 1rem;">
+    <span>Básicos: <span id="basicos-num">78</span> &nbsp; | &nbsp;</span>
+    <span>Especiales: <span id="especiales-num">34</span> &nbsp; | &nbsp;</span>
+    <span>Total: <span id="total-num">112</span></span>
+  </div>
+</section>
+
+
+  
   <footer>
     <p>Campamento Mirador: Vía al Valle del Quimi SN, a tres kilómetros de la UPC de Tundayme.<br>
     Tundayme, Zamora Chinchipe, Ecuador<br>
@@ -243,5 +258,84 @@
       });
     });
   </script>
+
+  <!-- Chart.js CDN DONA ESTADISTICA -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Números de ensayos
+      let ensayosBasicos = 5000;
+      let ensayosEspeciales = 350;
+      let totalEnsayos = ensayosBasicos + ensayosEspeciales;
+
+      // Actualiza los números en el HTML
+      document.getElementById('basicos-num').textContent = ensayosBasicos;
+      document.getElementById('especiales-num').textContent = ensayosEspeciales;
+      document.getElementById('total-num').textContent = totalEnsayos;
+
+      // --- PLUGIN PARA TEXTO AL CENTRO ---
+      const centerText = {
+        id: 'centerText',
+        afterDraw(chart, args, options) {
+          const {ctx, chartArea: {width, height}} = chart;
+          ctx.save();
+          // Número total grande
+          ctx.font = 'bold 4.5rem Inter, Arial, sans-serif';
+          ctx.fillStyle = '#0F3D54';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(totalEnsayos, width / 2, height / 2 - 18);
+
+          // Palabra "TOTAL" debajo en más pequeño
+          ctx.font = 'bold 1.5rem Inter, Arial, sans-serif';
+          ctx.fillStyle = '#B3611F';
+          ctx.fillText('TOTAL', width / 2, height / 2 + 40);
+          ctx.restore();
+        }
+      };
+
+      // Gráfico de DONA (solo básicos y especiales)
+      const ctx = document.getElementById('grafico-ensayos').getContext('2d');
+      const miGrafico = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Básicos', 'Especiales'],
+          datasets: [{
+            data: [ensayosBasicos, ensayosEspeciales],
+            backgroundColor: ['#0F3D54', '#B3611F'],
+            borderColor: '#ffffff',
+            borderWidth: 3,
+          }]
+        },
+        options: {
+          responsive: false,
+          cutout: '68%', // Grosor del aro
+          plugins: {
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                color: '#205E78',
+                font: { size: 16, weight: 'bold' }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  let label = context.label || '';
+                  let value = context.parsed;
+                  let total = ensayosBasicos + ensayosEspeciales;
+                  let porcentaje = ((value / total) * 100).toFixed(1) + '%';
+                  return `${label}: ${value} (${porcentaje})`;
+                }
+              }
+            }
+          }
+        },
+        plugins: [centerText]
+      });
+    });
+  </script>
+
 </body>
 </html>
