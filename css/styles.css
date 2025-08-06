@@ -1,5 +1,5 @@
 html {
-  scroll-padding-top: 72px;
+  scroll-padding-top: 50px;
 }
 
 body {
@@ -466,4 +466,7 @@ footer {
   section {
     padding: 1rem 0.2rem;
   }
+}
+section:not(#inicio) > h2 {
+  margin-top: 2.4rem;
 }
