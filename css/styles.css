@@ -102,89 +102,6 @@ nav ul li a.activo::after {
   display: none;
 }
 
-@media (max-width: 960px) {
-  nav {
-    flex-wrap: wrap;
-    padding: 0.08rem 0.5rem;
-    min-height: 52px;
-    align-items: center;
-  }
-  .menu-toggle {
-    display: block;
-    font-size: 2.2rem;
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    margin-right: 1rem;
-    z-index: 110;
-  }
-  #menu {
-    display: none;
-    position: absolute;
-    top: 52px;
-    left: 0;
-    width: 100vw;
-    background: #133F54;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.9rem 0 0.9rem 0;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.13);
-    z-index: 99;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
-  #menu.menu-visible {
-    display: flex;
-    animation: fadeDown 0.28s cubic-bezier(.67,-0.41,.31,1.29);
-  }
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-18px);}
-    to   { opacity: 1; transform: translateY(0);}
-  }
-  nav ul li {
-    width: 100%;
-    text-align: left;
-    margin: 0.08rem 0;
-  }
-  nav ul li a {
-    width: 98%;
-    display: block;
-    font-size: 1.16rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    background: #17516b;
-    color: #fff;
-    padding: 0.68rem 1.13rem;
-    border-radius: 0.85rem;
-    margin: 0.13rem auto 0.14rem auto;
-    transition: background 0.19s, color 0.19s, box-shadow 0.13s;
-    box-shadow: 0 2px 10px rgba(13,27,51,0.06);
-    border: 2px solid transparent;
-  }
-  nav ul li a.activo,
-  nav ul li a.selected {
-    background: #B3611F;
-    color: #fff;
-    border-color: #f9b56d;
-    box-shadow: 0 2px 18px rgba(179,97,31,0.09);
-    font-weight: 900;
-  }
-  nav ul li a:hover {
-    background: #e3edf7;
-    color: #0F3D54;
-    border-color: #0F3D54;
-  }
-  .logo {
-    height: 44px;
-    max-width: 120px;
-    margin-left: 0.7rem;
-    margin-right: 0.5rem;
-    object-fit: contain;
-    box-shadow: 0 2px 10px rgba(15,61,84,0.04);
-  }
-}
-
 /* ========== HERO PRINCIPAL ========== */
 .hero {
   position: relative;
@@ -462,11 +379,7 @@ footer {
 }
 
 /* ========== UTILIDADES ========== */
-@media (max-width: 960px) {
-  section {
-    padding: 1rem 0.2rem;
-  }
-}
+
 section:not(#inicio) > h2 {
   margin-top: 2.4rem;
 }
@@ -650,13 +563,7 @@ section:not(#inicio) > h2 {
   max-width: 480px;
     -webkit-overflow-scrolling: touch;
 }
-/* ─── Responsive: en móviles ocupar casi todo el ancho/pantalla ─── */
-@media (max-width: 960px) {
-  #modal-noticia .modal-contenido {
-    max-width: 90vw;   /* ajusta al ancho de la pantalla */
-    max-height: 90vh;  /* hasta 90% de la altura */
-  }
-}
+
 /* ─── Layout responsive para Misión y Visión ─── */
 .mision-vision-seccion .mv-container {
   display: grid;
@@ -691,9 +598,26 @@ section:not(#inicio) > h2 {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========== MENÚ HAMBURGUESA Y RESPONSIVE NAV ========== */
 @media (max-width: 960px) {
   nav {
-    justify-content: center; /* Centra todo en el nav */
+    flex-wrap: wrap;
+    padding: 0.08rem 0.5rem;
+    min-height: 52px;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+  }
+  .menu-toggle {
+    display: block;
+    font-size: 2.2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 1rem;
+    z-index: 110;
     position: relative;
   }
   .logo {
@@ -701,50 +625,17 @@ section:not(#inicio) > h2 {
     left: 50%;
     top: 6px;
     transform: translateX(-50%);
-    height: 68px !important;   /* MÁS GRANDE que antes */
-    max-width: 180px !important;
+    height: 44px !important;
+    max-width: 110px !important;
     margin: 0 !important;
-    z-index: 102; /* Encima del menú */
+    z-index: 102;
     background: white;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 12px rgba(15,61,84,0.11);
-    padding: 2px 8px;
+    padding: 2px 10px;
     object-fit: contain;
   }
-  .menu-toggle {
-    z-index: 110; /* Encima del logo */
-  }
-}
-@media (max-width: 960px) {
-  nav {
-    justify-content: flex-start; /* Alinea hamburguesa a la izquierda */
-    position: relative;
-    min-height: 56px;
-  }
-  .menu-toggle {
-    display: block;
-    position: relative;
-    z-index: 110; /* Encima de todo */
-    margin-right: 0;
-  }
-  .logo {
-      position: absolute;
-      left: 50%;
-      top: 6px;
-      transform: translateX(-50%);
-      height: 44px !important;   /* MÁS PEQUEÑO: puedes poner 44px o el valor que quieras */
-      max-width: 110px !important;
-      margin: 0 !important;
-      z-index: 102;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(15,61,84,0.11);
-      padding: 2px 10px;
-      object-fit: contain;
-  }
-
   #menu {
-    /* El menú hamburguesa, igual que antes */
     display: none;
     position: absolute;
     top: 52px;
@@ -763,12 +654,31 @@ section:not(#inicio) > h2 {
     display: flex;
     animation: fadeDown 0.28s cubic-bezier(.67,-0.41,.31,1.29);
   }
-}
-@media (max-width: 960px) {
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px);}
+    to   { opacity: 1; transform: translateY(0);}
+  }
+  nav ul li {
+    width: 100%;
+    text-align: left;
+    margin: 0.08rem 0;
+  }
   nav ul li a {
-    /* ...tus otros estilos... */
+    width: 98%;
+    display: block;
+    font-size: 1.16rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: #17516b;
+    color: #fff;
+    padding: 0.68rem 1.13rem;
+    border-radius: 0.85rem;
+    margin: 0.13rem auto 0.14rem auto;
     transition: background 0.19s, color 0.19s, box-shadow 0.13s;
-    /* Elimina cualquier 'transform' aquí */
+    box-shadow: 0 2px 10px rgba(13,27,51,0.06);
+    border: 2px solid transparent;
+    /* Elimina transform en móvil */
+    transform: none !important;
   }
   nav ul li a.activo,
   nav ul li a.selected {
@@ -776,7 +686,6 @@ section:not(#inicio) > h2 {
     color: #B3611F !important;
     border-color: #B3611F;
     font-weight: 900;
-    /* Elimina transform y box-shadow extra si lo tienes */
     box-shadow: 0 2px 12px rgba(179,97,31,0.11);
     transform: none !important;
   }
@@ -784,7 +693,6 @@ section:not(#inicio) > h2 {
     background: #e3edf7 !important;
     color: #0F3D54 !important;
     border-color: #0F3D54;
-    /* Quita transform en hover también */
     transform: none !important;
   }
 }
