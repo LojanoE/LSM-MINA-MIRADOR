@@ -1,8 +1,8 @@
 // service-worker.js
-// Versión 1 - actualizado el 6 de agosto 2025
+// Versión 2 - actualizado el 6 de agosto 2025
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('lsm-mirador-cache-V1').then(cache => {
+    caches.open('lsm-mirador-cache-V2').then(cache => {
       return cache.addAll([
         '/',
         '/index.html',
