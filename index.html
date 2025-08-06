@@ -30,39 +30,44 @@
 
   <section id="ensayos">
     <h2>ENSAYOS</h2>
-    <div class="ensayo">
-      <img src="img/ensayos/ELA.jpg" alt="Límites de Atterberg">
-      <h3>Límites de Atterberg</h3>
-      <p>
-        Determina los estados de consistencia del suelo según su humedad.<br>
-        <strong style="color: #B3611F;">Norma ASTM D4318</strong>
-      </p>
+    <div class="ensayo-tabs">
+      <button class="tab-btn activo" data-tipo="basicos">Básicos</button>
+      <button class="tab-btn" data-tipo="especiales">Especiales</button>
     </div>
-    <div class="ensayo">
-      <img src="img/ensayos/VDC.jpg" alt="Ensayo de Veleta de Corte">
-      <h3>Ensayo de Veleta de Corte</h3>
-      <p>
-        Determina la resistencia al corte no drenada en suelos blandos y saturados.<br>
-        <strong style="color: #B3611F;">Norma ASTM D2573</strong>
-      </p>
+    <div id="ensayos-basicos" class="grupo-ensayos">
+      <!-- Ensayos Básicos -->
+      <div class="ensayo">
+        <img src="img/ensayos/ELA.jpg" alt="Límites de Atterberg">
+        <h3>Límites de Atterberg</h3>
+        <p>Determina los estados de consistencia del suelo según su humedad.<br>
+        <strong style="color: #B3611F;">Norma ASTM D4318</strong></p>
+      </div>
+      <div class="ensayo">
+        <img src="img/ensayos/PRA.jpg" alt="Pozo de Reemplazo de Agua">
+        <h3>Pozo de Reemplazo de Agua</h3>
+        <p>Medición de densidad en campo mediante reemplazo de agua.<br>
+        <strong style="color: #B3611F;">Norma ASTM D5030</strong></p>
+      </div>
+      <!-- Más básicos -->
     </div>
-    <div class="ensayo">
-      <img src="img/ensayos/PRA.jpg" alt="Pozo de Reemplazo de Agua">
-      <h3>Pozo de Reemplazo de Agua</h3>
-      <p>
-        Medición de densidad en campo mediante reemplazo de agua.<br>
-        <strong style="color: #B3611F;">Norma ASTM D5030</strong>
-      </p>
-    </div>
-    <div class="ensayo">
-      <img src="img/ensayos/TRX.jpg" alt="Triaxial de suelos">
-      <h3>Triaxial de suelos UU/CU/CD y permeabilidad</h3>
-      <p>
-        Ensayo para determinar la resistencia y permeabilidad en diferentes condiciones.<br>
-        <strong style="color: #B3611F;">Norma ASTM D4767</strong>
-      </p>
+    <div id="ensayos-especiales" class="grupo-ensayos oculto">
+      <!-- Ensayos Especiales -->
+      <div class="ensayo">
+        <img src="img/ensayos/VDC.jpg" alt="Ensayo de Veleta de Corte">
+        <h3>Ensayo de Veleta de Corte</h3>
+        <p>Determina la resistencia al corte no drenada en suelos blandos y saturados.<br>
+        <strong style="color: #B3611F;">Norma ASTM D2573</strong></p>
+      </div>
+      <div class="ensayo">
+        <img src="img/ensayos/TRX.jpg" alt="Triaxial de suelos">
+        <h3>Triaxial de suelos UU/CU/CD y permeabilidad</h3>
+        <p>Ensayo para determinar la resistencia y permeabilidad en diferentes condiciones.<br>
+        <strong style="color: #B3611F;">Norma ASTM D4767</strong></p>
+      </div>
+      <!-- Más especiales -->
     </div>
   </section>
+
 
 <section id="mision" class="mision-vision-seccion">
   <div class="mv-container">
@@ -106,6 +111,7 @@
     </div>
   </div>
   <script>
+    // Navegación por secciones (menú)
     const menuLinks = document.querySelectorAll('nav ul li a');
     const sections = document.querySelectorAll('section');
     const modal = document.getElementById('modal-ensayo');
@@ -155,6 +161,7 @@
       sections.forEach(sec => sec.classList.remove('oculto'));
     });
 
+    // MODAL para mostrar info y zoom de ensayo
     if (modal) {
       const modalImg = modal.querySelector('.modal-img');
       const modalTitulo = modal.querySelector('.modal-titulo');
@@ -182,6 +189,30 @@
         if(e.key === 'Escape') modal.classList.add('oculto');
       });
     }
+
+    // --- TABS ENSAYOS ---
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const ensayosBasicos = document.getElementById('ensayos-basicos');
+    const ensayosEspeciales = document.getElementById('ensayos-especiales');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Quitar el estilo activo de todos
+        tabBtns.forEach(b => b.classList.remove('activo'));
+        // Activar el seleccionado
+        this.classList.add('activo');
+        // Mostrar el grupo correspondiente
+        if (this.dataset.tipo === 'basicos') {
+          ensayosBasicos.classList.remove('oculto');
+          ensayosEspeciales.classList.add('oculto');
+        } else {
+          ensayosBasicos.classList.add('oculto');
+          ensayosEspeciales.classList.remove('oculto');
+        }
+        // Cierra el modal si está abierto
+        if (modal) modal.classList.add('oculto');
+      });
+    });
   </script>
 </body>
 </html>

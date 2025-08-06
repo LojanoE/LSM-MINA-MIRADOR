@@ -71,13 +71,7 @@ section {
 }
 
 /* GALERÍA DE ENSAYOS */
-#ensayos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  align-items: start;
-  justify-items: start;
-}
+
 
 .ensayo {
   background-color: white;
@@ -281,4 +275,44 @@ footer {
 }
 .modal-cerrar:hover {
   color: #c03600;
+}
+.grupo-ensayos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  margin: 0 auto 1.5rem auto;
+  justify-items: center;
+  max-width: 950px;
+}
+
+@media (max-width: 800px) {
+  .grupo-ensayos {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+.ensayo-tabs {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.3rem;
+  justify-content: center;  /* <-- centrado */
+}
+
+
+.tab-btn {
+  background: #e3edf7;
+  color: #0F3D54;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(11,61,84,0.08);
+}
+.tab-btn.activo,
+.tab-btn:hover {
+  background: #B3611F;
+  color: #fff;
 }
