@@ -51,11 +51,12 @@ nav ul li a:hover {
 
 /* LOGO A LA DERECHA */
 .logo {
-  height: 54px;
+  height: 80px;
+  max-width: 300px;
   margin-left: 2.5rem;
   display: block;
-  max-width: 200px;
   object-fit: contain;
+  box-shadow: 0 2px 12px rgba(15,61,84,0.11);
 }
 
 /* HERO / CABECERA SECCIÓN PRINCIPAL */
@@ -67,7 +68,7 @@ nav ul li a:hover {
 }
 
 section {
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 /* GALERÍA DE ENSAYOS */
@@ -468,4 +469,11 @@ nav ul li a:hover {
   color: #0F3D54;
   box-shadow: 0 3px 12px rgba(15, 61, 84, 0.18);
   transform: scale(1.09);
+}
+@media (max-width: 700px) {
+  .logo {
+    height: 50px;
+    max-width: 140px;
+    margin-left: 1rem;
+  }
 }
