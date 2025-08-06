@@ -647,5 +647,13 @@ section:not(#inicio) > h2 {
 }
 /* Opcional: ancho distinto para noticias */
 #modal-noticia .modal-contenido {
-  max-width: 600px;
+  max-width: 480px;
+    -webkit-overflow-scrolling: touch;
+}
+/* ─── Responsive: en móviles ocupar casi todo el ancho/pantalla ─── */
+@media (max-width: 700px) {
+  #modal-noticia .modal-contenido {
+    max-width: 90vw;   /* ajusta al ancho de la pantalla */
+    max-height: 90vh;  /* hasta 90% de la altura */
+  }
 }
