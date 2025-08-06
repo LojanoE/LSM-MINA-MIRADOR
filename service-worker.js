@@ -2,7 +2,7 @@
 // Versión 1 - actualizado el 6 de agosto 2025
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('lsm-mirador-cache').then(cache => {
+    caches.open('lsm-mirador-cache-V1').then(cache => {
       return cache.addAll([
         '/',
         '/index.html',
