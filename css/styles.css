@@ -86,14 +86,16 @@ nav ul li a.activo::after {
 
 /* LOGO DERECHO */
 .logo {
-  height: 64px;
-  max-width: 170px;
-  margin-left: 2rem;
-  margin-right: 0;
+  height: 96px;         /* Aumenta la altura, prueba 90-110px */
+  max-width: 280px;     /* Si quieres, también sube el ancho máximo */
+  margin-left: 2.5rem;
+  margin-right: 0.5rem;
   display: block;
   object-fit: contain;
   box-shadow: 0 2px 12px rgba(15,61,84,0.09);
+  transition: height 0.25s, max-width 0.25s;
 }
+
 
 /* ========== MENÚ HAMBURGUESA SOLO EN MÓVIL ========== */
 .menu-toggle {
