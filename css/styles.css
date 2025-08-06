@@ -102,7 +102,7 @@ nav ul li a.activo::after {
   display: none;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   nav {
     flex-wrap: wrap;
     padding: 0.08rem 0.5rem;
@@ -233,7 +233,7 @@ nav ul li a.activo::after {
   margin-top: 1.1rem;
   text-shadow: 0 1px 8px rgba(0,0,0,0.18);
 }
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   .hero {
     height: 320px;
   }
@@ -346,7 +346,7 @@ section {
     padding: 0 0.5rem;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   .grupo-ensayos {
     grid-template-columns: 1fr;
     max-width: 100vw;
@@ -381,7 +381,7 @@ section {
   background: #B3611F;
   color: #fff;
 }
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   .ensayo-tabs {
     flex-direction: column;
     gap: 0.6rem;
@@ -462,7 +462,7 @@ footer {
 }
 
 /* ========== UTILIDADES ========== */
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   section {
     padding: 1rem 0.2rem;
   }
@@ -651,7 +651,7 @@ section:not(#inicio) > h2 {
     -webkit-overflow-scrolling: touch;
 }
 /* ─── Responsive: en móviles ocupar casi todo el ancho/pantalla ─── */
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   #modal-noticia .modal-contenido {
     max-width: 90vw;   /* ajusta al ancho de la pantalla */
     max-height: 90vh;  /* hasta 90% de la altura */
@@ -691,7 +691,7 @@ section:not(#inicio) > h2 {
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   nav {
     justify-content: center; /* Centra todo en el nav */
     position: relative;
@@ -715,7 +715,7 @@ section:not(#inicio) > h2 {
     z-index: 110; /* Encima del logo */
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   nav {
     justify-content: flex-start; /* Alinea hamburguesa a la izquierda */
     position: relative;
@@ -762,5 +762,29 @@ section:not(#inicio) > h2 {
   #menu.menu-visible {
     display: flex;
     animation: fadeDown 0.28s cubic-bezier(.67,-0.41,.31,1.29);
+  }
+}
+@media (max-width: 960px) {
+  nav ul li a {
+    /* ...tus otros estilos... */
+    transition: background 0.19s, color 0.19s, box-shadow 0.13s;
+    /* Elimina cualquier 'transform' aquí */
+  }
+  nav ul li a.activo,
+  nav ul li a.selected {
+    background: #fff;
+    color: #B3611F !important;
+    border-color: #B3611F;
+    font-weight: 900;
+    /* Elimina transform y box-shadow extra si lo tienes */
+    box-shadow: 0 2px 12px rgba(179,97,31,0.11);
+    transform: none !important;
+  }
+  nav ul li a:hover {
+    background: #e3edf7 !important;
+    color: #0F3D54 !important;
+    border-color: #0F3D54;
+    /* Quita transform en hover también */
+    transform: none !important;
   }
 }
